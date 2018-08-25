@@ -10,3 +10,7 @@ body {
     position: relative;
     display: flex;
 }
+
+.MuiTypography-body1-63 {
+    color: #fff !important;
+}

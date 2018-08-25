@@ -30,13 +30,20 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Button from '@material-ui/core/Button/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
+import Switch from '@material-ui/core/Switch/Switch';
+import FormGroup from '@material-ui/core/FormGroup/FormGroup';
 
-import shortFolderData from './data/long.json';
+
+import shortFolderData from './data/short.json';
+import longFolderData from './data/long.json';
 import './App.css';
 import treeBeardStyles from './constants/treeBeardStyles';
 import treeDecorators from './constants/treeDecorators';
 import { changeStructure, restoreItem } from './actions';
 import * as filters from './utils/filters';
+
+import { persistor } from './store';
 
 
 const drawerWidth = 350;
@@ -48,6 +55,7 @@ const styles = theme => ({
     // height: '100vh',
     zIndex: 1,
     display: 'flex',
+    overflow: 'scroll',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -72,6 +80,7 @@ class App extends Component {
       filterData: null,
       showRecycleBin: false,
       cursor: props.folderList,
+      longData: props.folderList.children.length > 4,
       // data2: props.folderList,
     };
   }
@@ -86,6 +95,30 @@ class App extends Component {
       });
     }
   }
+
+  getI = () => {
+    this.index += 1;
+    return this.index;
+  };
+
+  index = 1;
+
+  handleLongShortChange = (event, checked) => {
+    this.setState({
+      longData: checked,
+      cursor: null,
+    }, () => {
+      persistor.purge()
+        .then(() => {
+          const data = this.state.longData ? longFolderData : shortFolderData;
+          this.props.changeStructure({
+            name: '/',
+            toggled: true,
+            children: this.convertFolderObj(data),
+          });
+        });
+    });
+  };
 
 
   onToggle = (node, toggled) => {
@@ -118,13 +151,6 @@ class App extends Component {
       filterData: filtered,
     });
   };
-
-  getI = () => {
-    this.index += 1;
-    return this.index;
-  };
-
-  index = 1;
 
   convertFolderObj = (obj, i = 1) => {
     if (isArray(obj)) {
@@ -256,12 +282,12 @@ class App extends Component {
     ]);
   };
 
-
   render() {
     const { classes, folderList: data } = this.props;
     const {
       cursor, filterData,
       showRecycleBin,
+      longData,
     } = this.state;
 
 
@@ -269,9 +295,31 @@ class App extends Component {
       <div className={classes.root}>
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography
+              variant="title"
+              color="inherit"
+              noWrap
+              style={{
+                flexGrow: 1,
+              }}
+            >
               Sumo Logic
             </Typography>
+            <FormGroup>
+              <FormControlLabel
+                style={{
+                  color: '#fff',
+                }}
+                control={
+                  <Switch
+                    checked={longData}
+                    onChange={this.handleLongShortChange}
+                    aria-label="LongShorySwitch"
+                  />
+                }
+                label={longData ? 'Long Data' : 'Short Data'}
+              />
+            </FormGroup>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -279,10 +327,18 @@ class App extends Component {
           classes={{
             paper: classes.drawerPaper,
           }}
+          style={{
+            maxHeight: 'calc(100vh - 20px)',
+            overflow: 'scroll',
+          }}
         >
           <div className={classes.toolbar} />
           <Divider />
           <ListItem
+            style={{
+              padding: 20,
+              minHeight: 60,
+            }}
             button
             onClick={() => {
               this.setState({
@@ -322,7 +378,13 @@ class App extends Component {
               onChange={this.onFilterMouseUp}
             />
           </Paper>
-          <Paper className={classes.root}>
+          <Paper
+            className={classes.root}
+            style={{
+              maxHeight: 'calc(500px - 20px)',
+              paddingBottom: 20,
+            }}
+          >
             {cursor && (
               <Table className={classes.table}>
                 <TableHead>
