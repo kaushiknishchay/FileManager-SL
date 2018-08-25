@@ -1,0 +1,50 @@
+[
+    {
+      "title": "LittleBigPlanet PS Vita",
+      "Game play resources":
+        {
+          "Installation":
+            [
+              { "file_name": "install.iso", "type": "iso image" },
+              { "file_name": "archive_unbox.dat", "type": "dat file" }
+            ],
+          "Resource Dependency":
+              [
+                { "file_name": "profile.sav", "type": "sav file" },
+                { "file_name": "snd0.AT3", "type": "AT3 file" }
+              ]
+        }
+    },
+    {
+      "title": "Marvel Super Hero Edition",
+      "Game play resources":
+        {
+          "Installation":
+            [
+              { "file_name": "install.iso", "type": "iso image" },
+              { "file_name": "archive_unbox.dat", "type": "dat file" }
+            ],
+          "Resource Dependency":
+              [
+                { "file_name": "profile.sav", "type": "sav file" },
+                { "file_name": "snd0.AT3", "type": "AT3 file" }
+              ]
+        }
+    },
+    {
+      "title": "Splice: Tree of Life",
+      "Game play resources":
+        {
+          "Installation":
+            [
+              { "file_name": "install.iso", "type": "iso image" },
+              { "file_name": "archive_unbox.dat", "type": "dat file" }
+            ],
+          "Resource Dependency":
+              [
+                { "file_name": "profile.sav", "type": "sav file" },
+                { "file_name": "snd0.AT3", "type": "AT3 file" }
+              ]
+        }
+    }
+]
