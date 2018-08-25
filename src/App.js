@@ -71,6 +71,7 @@ class App extends Component {
     this.state = {
       filterData: null,
       showRecycleBin: false,
+      cursor: props.folderList,
       // data2: props.folderList,
     };
   }
@@ -269,7 +270,7 @@ class App extends Component {
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <Typography variant="title" color="inherit" noWrap>
-              Clipped drawer
+              Sumo Logic
             </Typography>
           </Toolbar>
         </AppBar>
@@ -280,15 +281,6 @@ class App extends Component {
           }}
         >
           <div className={classes.toolbar} />
-          <Divider />
-          <List>
-            <Treebeard
-              style={treeBeardStyles}
-              data={filterData || data}
-              onToggle={this.onToggle}
-              decorators={treeDecorators}
-            />
-          </List>
           <Divider />
           <ListItem
             button
@@ -303,6 +295,16 @@ class App extends Component {
             </ListItemIcon>
             <ListItemText primary="Recycle Bin" />
           </ListItem>
+          <Divider />
+          <List>
+            <Treebeard
+              style={treeBeardStyles}
+              data={filterData || data}
+              onToggle={this.onToggle}
+              decorators={treeDecorators}
+            />
+          </List>
+          <Divider />
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -328,7 +330,9 @@ class App extends Component {
                     <TableCell>Name</TableCell>
                     <TableCell numeric>Date</TableCell>
                     <TableCell numeric>Size</TableCell>
-                    <TableCell>{showRecycleBin ? '&nbsp;' : 'File Type'}</TableCell>
+                    <TableCell>
+                      {showRecycleBin ? '&nbsp;' : 'File Type'}
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

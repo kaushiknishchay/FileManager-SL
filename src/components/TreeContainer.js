@@ -119,7 +119,7 @@ class TreeContainer extends Component {
 
     return (
       <React.Fragment>
-        <ListItem button onClick={onClick}>
+        <ListItem button>
           <decorators.Toggle {...this.props} onClick={onClick} />
           <decorators.Header {...this.props} onClick={onClick} />
 
