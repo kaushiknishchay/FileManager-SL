@@ -22,19 +22,19 @@ export default {
     }
     if (props.node.toggled) {
       return (
-        <ListItemIcon style={props.style} button onClick={props.onClick}>
+        <ListItemIcon style={props.style} onClick={props.onClick}>
           <FolderOpenIcon />
         </ListItemIcon>
       );
     }
     return (
-      <ListItemIcon style={props.style} button onClick={props.onClick}>
+      <ListItemIcon style={props.style} onClick={props.onClick}>
         <FolderIcon />
       </ListItemIcon>
     );
   },
   Header: props => (
-    <ListItemText button primary={props.node.name} onClick={props.onClick} />
+    <ListItemText primary={props.node.name} onClick={props.onClick} />
   ),
   Container: TreeContainer,
 };
