@@ -119,11 +119,14 @@ class TreeContainer extends Component {
 
     return (
       <React.Fragment>
-        <ListItem button>
+        <ListItem button onClick={onClick}>
           <decorators.Toggle {...this.props} onClick={onClick} />
           <decorators.Header {...this.props} onClick={onClick} />
 
           <IconButton
+            style={{
+              zIndex: 999,
+            }}
             aria-label="Actions"
             aria-owns={anchorEl ? `actionsMenu-${node.name}` : null}
             aria-haspopup="true"
