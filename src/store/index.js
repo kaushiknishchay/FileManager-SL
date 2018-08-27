@@ -23,7 +23,7 @@ const sagaMiddleware = createSagaMiddleware();
 // create a redux store with our reducer above and middleware
 const store = createStore(
   pReducer,
-  applyMiddleware(sagaMiddleware, logger),
+  (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? applyMiddleware(sagaMiddleware, logger) : applyMiddleware(sagaMiddleware),
 );
 
 // run the saga
