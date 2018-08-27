@@ -80,7 +80,7 @@ class App extends Component {
       filterData: null,
       showRecycleBin: false,
       cursor: props.folderList,
-      longData: props.folderList.children.length > 4,
+      longData: false,
       // data2: props.folderList,
     };
   }
