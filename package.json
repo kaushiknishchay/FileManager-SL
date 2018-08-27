@@ -2,6 +2,7 @@
   "name": "filemanagersl",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://kaushik.tech/FileManager-SL/docs",
   "dependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
