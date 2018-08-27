@@ -303,7 +303,7 @@ class App extends Component {
                 flexGrow: 1,
               }}
             >
-              Sumo Logic
+              File Manager
             </Typography>
             <FormGroup>
               <FormControlLabel
